@@ -29,11 +29,11 @@ cm run script --tags=mlperf,power,server --device_type=49 --device_port=/dev/usb
 cm run script --tags=mlperf,power,server --power_server=<POWER_SERVER_IP> 
 ```
 
-## Run a dummy workload with power using a docker container
+## Run a dummy workload with power inside a docker container
 ```
-cm run script --tags=run,docker,container --script_tags=run,mlperf,power,server \
---cm_repo=octoml@ck --gh_token=<GitHub AUTH_TOKEN> --docker_os=ubuntu --docker_os_version=22.04 \
---device=/dev/usbtmc0 --port_maps,=4950:4950
+cm run script --tags=run,docker,container --cm_repo=octoml@ck --gh_token=<GitHub AUTH_TOKEN> \
+--docker_os=ubuntu --docker_os_version=22.04 --print_env --device=/dev/usbtmc0 --port_maps,=4950:4950 \
+--run_cmd="cm run script --tags=run,mlperf,power,server --adr.power-src.tags=_octoml --adr.power-src.version=fix"
 ```
 
 ## Running MLPerf Image Classification with power
