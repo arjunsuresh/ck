@@ -23,18 +23,33 @@ cm run script --tags=mlperf,power,server --device_type=49 --device_port=/dev/usb
 ```
 `--device_type=49` corresponds to Yokogawa 310E and `ptd -h` should list the device_type for all supported devices. More configuration options can be found [here](https://github.com/mlcommons/power-dev/tree/master/ptd_client_server)
 
-
-## Running a dummy workload with power
-```
-cm run script --tags=mlperf,power,server --power_server=<POWER_SERVER_IP> 
-```
-
-## Run a dummy workload with power inside a docker container
+### Running the power server inside a docker container
 ```
 cm run script --tags=run,docker,container --cm_repo=octoml@ck --gh_token=<GitHub AUTH_TOKEN> \
---docker_os=ubuntu --docker_os_version=22.04 --print_env --device=/dev/usbtmc0 --port_maps,=4950:4950 \
+--docker_os=ubuntu --docker_os_version=22.04 --device=/dev/usbtmc0 --port_maps,=4950:4950 \
 --run_cmd="cm run script --tags=run,mlperf,power,server --adr.power-src.tags=_octoml --adr.power-src.version=fix"
 ```
 
-## Running MLPerf Image Classification with power
-TBD
+## Running a dummy workload with power (on host machine)
+```
+cm run script --tags=mlperf,power,client --power_server=<POWER_SERVER_IP> 
+```
+
+### Run a dummy workload with power inside a docker container
+```
+cm run script --tags=run,docker,container --cm_repo=octoml@ck \
+--docker_os=ubuntu --docker_os_version=22.04  \
+--run_cmd="cm run script --tags==mlperf,power,client --power_server=<POWER_SERVER_IP>"
+```
+
+## Running MLPerf Image Classification with power (on host machine)
+```
+cm run script --tags=app,mlperf,inference,_reference,_power,_resnet50,_onnxruntime,_cpu --mode=performance
+```
+
+### Running MLPerf Image Classification with power inside a docker container
+```
+cm run script --tags=run,docker,container --cm_repo=octoml@ck  \
+--docker_os=ubuntu --docker_os_version=22.04  \
+--run_cmd="cm run script --tags=app,mlperf,inference,_reference,_power,_resnet50,_onnxruntime,_cpu --mode=performance"
+```
