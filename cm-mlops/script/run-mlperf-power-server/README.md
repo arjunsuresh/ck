@@ -1,65 +1,149 @@
-*This README is automatically generated - don't edit! See [extra README](README-extra.md) for extra notes!*
-
 <details>
 <summary>Click here to see the table of contents.</summary>
 
-* [About](#about)
-* [Category](#category)
-* [Origin](#origin)
-* [Meta description](#meta-description)
-* [Tags](#tags)
-* [Default environment](#default-environment)
-* [CM script workflow](#cm-script-workflow)
-* [New environment export](#new-environment-export)
-* [New environment detected from customize](#new-environment-detected-from-customize)
+* [Description](#description)
+* [Information](#information)
 * [Usage](#usage)
   * [ CM installation](#cm-installation)
   * [ CM script automation help](#cm-script-automation-help)
   * [ CM CLI](#cm-cli)
   * [ CM Python API](#cm-python-api)
+  * [ CM GUI](#cm-gui)
   * [ CM modular Docker container](#cm-modular-docker-container)
-  * [ Script input flags mapped to environment](#script-input-flags-mapped-to-environment)
+* [Customization](#customization)
+  * [ Script flags mapped to environment](#script-flags-mapped-to-environment)
+  * [ Default environment](#default-environment)
+* [Script workflow, dependencies and native scripts](#script-workflow-dependencies-and-native-scripts)
+* [Script output](#script-output)
+* [New environment keys (filter)](#new-environment-keys-(filter))
+* [New environment keys auto-detected from customize](#new-environment-keys-auto-detected-from-customize)
 * [Maintainers](#maintainers)
 
 </details>
 
+*Note that this README is automatically generated - don't edit! See [more info](README-extra.md).*
+
+### Description
+
+
+See [more info](README-extra.md).
+
+#### Information
+
+* Category: *Modular MLPerf benchmarks.*
+* CM GitHub repository: *[mlcommons@ck](https://github.com/mlcommons/ck/tree/master/cm-mlops)*
+* GitHub directory for this script: *[GitHub](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/run-mlperf-power-server)*
+* CM meta description for this script: *[_cm.json](_cm.json)*
+* CM "database" tags to find this script: *run,mlc,mlcommons,mlperf,power,server,power-server*
+* Output cached?: *False*
 ___
-### About
+### Usage
+
+#### CM installation
+
+[Guide](https://github.com/mlcommons/ck/blob/master/docs/installation.md)
+
+##### CM pull repository
+
+```cm pull repo mlcommons@ck```
+
+##### CM script automation help
+
+```cm run script --help```
+
+#### CM CLI
+
+1. `cm run script --tags=run,mlc,mlcommons,mlperf,power,server,power-server [--input_flags]`
+
+2. `cm run script "run mlc mlcommons mlperf power server power-server" [--input_flags]`
+
+3. `cm run script 5bc68aaf389a40bd [--input_flags]`
+
+* `variations` can be seen [here](#variations)
+
+* `input_flags` can be seen [here](#script-flags-mapped-to-environment)
+
+#### CM Python API
+
+<details>
+<summary>Click here to expand this section.</summary>
+
+```python
+
+import cmind
+
+r = cmind.access({'action':'run'
+                  'automation':'script',
+                  'tags':'run,mlc,mlcommons,mlperf,power,server,power-server'
+                  'out':'con',
+                  ...
+                  (other input keys for this script)
+                  ...
+                 })
+
+if r['return']>0:
+    print (r['error'])
+
+```
+
+</details>
+
+
+#### CM GUI
+
+```cm run script --tags=gui --script="run,mlc,mlcommons,mlperf,power,server,power-server"```
+
+Use this [online GUI](https://cKnowledge.org/cm-gui/?tags=run,mlc,mlcommons,mlperf,power,server,power-server) to generate CM CMD.
+
+#### CM modular Docker container
 
 *TBD*
-___
-### Category
-
-Modular MLPerf benchmarks.
-___
-### Origin
-
-* GitHub repository: *[mlcommons@ck](https://github.com/mlcommons/ck/tree/master/cm-mlops)*
-* CM artifact for this script (interoperability module, native scripts and meta): *[GitHub](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/run-mlperf-power-server)*
-* CM automation "script": *[Docs](https://github.com/octoml/ck/blob/master/docs/list_of_automations.md#script)*
 
 ___
-### Meta description
-[_cm.json](_cm.json)
+### Customization
+
+
+#### Script flags mapped to environment
+<details>
+<summary>Click here to expand this section.</summary>
+
+* `--device_port=value`  &rarr;  `CM_MLPERF_POWER_DEVICE_PORT=value`
+* `--device_type=value`  &rarr;  `CM_MLPERF_POWER_DEVICE_TYPE=value`
+* `--interface_flag=value`  &rarr;  `CM_MLPERF_POWER_INTERFACE_FLAG=value`
+* `--ntp_server=value`  &rarr;  `CM_MLPERF_POWER_NTP_SERVER=value`
+
+**Above CLI flags can be used in the Python CM API as follows:**
+
+```python
+r=cm.access({... , "device_port":...}
+```
+
+</details>
+
+#### Default environment
+
+<details>
+<summary>Click here to expand this section.</summary>
+
+These keys can be updated via `--env.KEY=VALUE` or `env` dictionary in `@input.json` or using script flags.
+
+* CM_MLPERF_POWER_NTP_SERVER: `time.google.com`
+* CM_MLPERF_POWER_INTERFACE_FLAG: ``
+* CM_MLPERF_POWER_DEVICE_TYPE: `49`
+* CM_MLPERF_POWER_SERVER_ADDRESS: `0.0.0.0`
+* CM_MLPERF_POWER_SERVER_PORT: `4950`
+* CM_MLPERF_POWER_DEVICE_PORT: `/dev/usbtmc0`
+
+</details>
 
 ___
-### Tags
-run,mlc,mlcommons,mlperf,power,server,power-server
+### Script workflow, dependencies and native scripts
 
-___
-### Default environment
-
-* CM_MLPERF_POWER_NTP_SERVER: **time.google.com**
-* CM_MLPERF_POWER_SERVER_OUTDIR: **~/mlperf_power_logs**
-* CM_MLPERF_POWER_LOG_FILE: **logs_ptdaemon.txt**
-* CM_MLPERF_POWER_INTERFACE_FLAG: ****
-* CM_MLPERF_POWER_DEVICE_TYPE: **49**
-* CM_MLPERF_POWER_DEVICE_PORT: **/dev/usbtmc0**
-___
-### CM script workflow
+<details>
+<summary>Click here to expand this section.</summary>
 
   1. ***Read "deps" on other CM scripts from [meta](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/run-mlperf-power-server/_cm.json)***
-     * get,python
+     * get,python3
        * CM names: `--adr.['python', 'python3']...`
        - CM script: [get-python3](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-python3)
      * get,mlperf,power,src
@@ -75,71 +159,15 @@ ___
   1. Read "posthook_deps" on other CM scripts from [meta](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/run-mlperf-power-server/_cm.json)
   1. ***Run "postrocess" function from [customize.py](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/run-mlperf-power-server/customize.py)***
   1. Read "post_deps" on other CM scripts from [meta](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/run-mlperf-power-server/_cm.json)
-___
-### New environment export
+</details>
 
 ___
-### New environment detected from customize
+### Script output
+#### New environment keys (filter)
 
-___
-### Usage
+#### New environment keys auto-detected from customize
 
-#### CM installation
-[Guide](https://github.com/mlcommons/ck/blob/master/docs/installation.md)
-
-#### CM script automation help
-```cm run script --help```
-
-#### CM CLI
-`cm run script --tags="run,mlc,mlcommons,mlperf,power,server,power-server"`
-
-*or*
-
-`cm run script "run mlc mlcommons mlperf power server power-server"`
-
-*or*
-
-`cm run script 5bc68aaf389a40bd`
-
-#### CM Python API
-
-```python
-import cmind
-
-r = cmind.access({'action':'run'
-                  'automation':'script',
-                  'tags':'run,mlc,mlcommons,mlperf,power,server,power-server'
-                  'out':'con',
-                  ...
-                  (other input keys for this script)
-                  ...
-                 })
-
-if r['return']>0:
-    print (r['error'])
-```
-
-#### CM modular Docker container
-*TBD*
-
-#### Script input flags mapped to environment
-
-* interface_flag --> **CM_MLPERF_POWER_INTERFACE_FLAG**
-* device_port --> **CM_MLPERF_POWER_DEVICE_PORT**
-* device_type --> **CM_MLPERF_POWER_DEVICE_TYPE**
-* outdir --> **CM_MLPERF_POWER_SERVER_OUTDIR**
-* ntp_server --> **CM_MLPERF_POWER_NTP_SERVER**
-* logfile --> **CM_MLPERF_POWER_LOG_FILE**
-
-Examples:
-
-```bash
-cm run script "run mlc mlcommons mlperf power server power-server" --interface_flag=...
-```
-```python
-r=cm.access({... , "interface_flag":"..."}
-```
 ___
 ### Maintainers
 
-* [Open MLCommons taskforce on education and reproducibility](https://github.com/mlcommons/ck/blob/master/docs/mlperf-education-workgroup.md)
+* [Open MLCommons taskforce on automation and reproducibility](https://github.com/mlcommons/ck/blob/master/docs/taskforce.md)

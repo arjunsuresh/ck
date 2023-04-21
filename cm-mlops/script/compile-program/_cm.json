@@ -16,8 +16,14 @@
         "compiler"
       ],
       "tags": "get,compiler"
+    },
+    {
+      "tags": "get,compiler-flags"
     }
   ],
+  "default_env": {
+    "SKIP_RECOMPILE": "no"
+  },
   "tags": [
     "compile",
     "program",

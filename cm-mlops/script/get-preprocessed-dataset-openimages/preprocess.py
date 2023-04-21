@@ -1,8 +1,8 @@
 import os
 import sys
 import os.path
-mlperf_vision_path = os.environ['CM_MLPERF_INFERENCE_VISION_PATH']
-python_path = os.path.join(mlperf_vision_path, "python")
+mlperf_src_path = os.environ['CM_MLPERF_INFERENCE_CLASSIFICATION_AND_DETECTION_PATH']
+python_path = os.path.join(mlperf_src_path, "python")
 sys.path.insert(0, python_path)
 
 import openimages
@@ -11,13 +11,14 @@ import shutil
 
 dataset_path = os.environ['CM_DATASET_PATH']
 dataset_list = os.environ.get('CM_DATASET_ANNOTATIONS_FILE_PATH', None)
-img_format = os.environ.get('CM_ML_MODEL_DATA_LAYOUT', 'NHWC')
+img_format = os.environ.get('CM_DATASET_DATA_LAYOUT', 'NHWC')
 count = int(os.environ.get('CM_DATASET_SIZE', 0)) or None
 preprocessed_dir = os.environ.get('CM_DATASET_PREPROCESSED_PATH', os.getcwd())
 image_width = int(os.environ.get('CM_DATASET_OPENIMAGES_RESIZE', 800))
 threads = os.environ.get('CM_NUM_THREADS', os.cpu_count())
 threads = os.environ.get('CM_NUM_PREPROCESS_THREADS', threads)
 name="openimages-" + str(image_width) + "-retinanet"
+
 openimages.OpenImages(data_path=dataset_path,
                         image_list=dataset_list,
                         name=name,

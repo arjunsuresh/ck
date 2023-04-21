@@ -4,6 +4,7 @@
   "automation_uid": "5b4e0237da074764",
   "category": "ML/AI frameworks",
   "cache": true,
+  "default_variation": "llvm",
   "deps": [
     {
       "tags": "cmake,get-cmake",
@@ -11,6 +12,9 @@
     },
     {
       "tags": "detect,cpu"
+    },
+    {
+      "tags": "get,generic-python-lib,_typing_extensions"
     },
     {
       "tags": "get,generic-python-lib,_decorator"

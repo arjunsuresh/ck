@@ -14,8 +14,11 @@
   ],
   "deps": [
     {
-      "tags": "get,cuda,_compiler"
+      "tags": "get,cuda,_toolkit"
     }
+  ],
+  "print_files_if_script_error": [
+    "tmp-run.out"
   ],
   "tags": [
     "get",

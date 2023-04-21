@@ -17,16 +17,16 @@ adaptable to continuously changing software and hardware.
 Check the [CM docs](https://github.com/mlcommons/ck/tree/master/docs) to understand
 the CM concept, install the CM tool and reuse portable CM scripts for MLOps and DevOps.
 
-Join the [open MLCommons taskforce on education and reproducibility](../docs/mlperf-education-workgroup.md) 
+Join the [open MLCommons taskforce on automation and reproducibility](../docs/mlperf-education-workgroup.md) 
 to learn how to make ML Systems more portable, reproducible and reusable 
 across rapidly evolving SW/HW stacks, and automate their benchmarking, optimization, 
 design space exploration and deployment.
 
-&copy; 2021-2022 [MLCommons](https://mlcommons.org)<br>
+&copy; 2021-2023 [MLCommons](https://mlcommons.org)<br>
 
 # Maintainers
 
-* [Grigori Fursin](https://cKnowledge.io/cf@gfursin)
+* [Grigori Fursin](https://cKnowledge.org/gfursin)
 * [Arjun Suresh](https://www.linkedin.com/in/arjunsuresh)
 
 # Acknowledgments

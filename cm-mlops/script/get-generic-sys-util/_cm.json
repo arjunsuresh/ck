@@ -31,6 +31,7 @@
         "glog-dev": {
           "apt": "libgoogle-glog-dev",
           "dnf": "glog-devel",
+          "yum": "glog-devel",
           "brew": "glog"
         }
       }
@@ -43,7 +44,86 @@
         "gflags-dev": {
           "apt": "libgflags-dev",
           "dnf": "gflags-devel",
+          "yum": "gflags-devel",
           "brew": "gflags"
+        }
+      }
+    },
+    "sox": {
+      "env": {
+        "CM_SYS_UTIL_NAME": "sox"
+      },
+      "state": {
+        "sox": {
+          "apt": "sox",
+          "dnf": "sox",
+          "brew": "sox"
+        }
+      }
+    },
+    "libre2-dev": {
+      "env": {
+        "CM_SYS_UTIL_NAME": "libre2-dev"
+      },
+      "state": {
+        "libre2-dev": {
+          "apt": "libre2-dev",
+          "yum": "libre-devel",
+          "dnf": "libre-devel",
+          "brew": ""
+        }
+      }
+    },
+    "libboost-all-dev": {
+      "env": {
+        "CM_SYS_UTIL_NAME": "libboost-all-dev"
+      },
+      "state": {
+        "libboost-all-dev": {
+          "apt": "libboost-all-dev",
+          "dnf": "boost-devel",
+          "yum": "boost-devel",
+          "brew": ""
+        }
+      }
+    },
+    "libnuma-dev": {
+      "env": {
+        "CM_SYS_UTIL_NAME": "libnuma-dev"
+      },
+      "state": {
+        "libnuma-dev": {
+          "apt": "libnuma-dev",
+          "yum": "numactl-libs",
+          "dnf": "numactl-libs",
+          "brew": ""
+        }
+      }
+    },
+    "libmpfr-dev": {
+      "env": {
+        "CM_SYS_UTIL_NAME": "libmpfr-dev"
+      },
+      "state": {
+        "libmpfr-dev": {
+          "apt": "libmpfr-dev",
+          "yum": "mpfr-devel.x86_64",
+          "dnf": "mpfr-devel.x86_64",
+          "brew": "",
+          "zypper": "mpfr-devel"
+        }
+      }
+    },
+    "rapidjson-dev": {
+      "env": {
+        "CM_SYS_UTIL_NAME": "rapidjson-dev"
+      },
+      "state": {
+        "rapidjson-dev": {
+          "apt": "rapidjson-dev",
+          "dnf": "rapidjson-devel",
+          "yum": "rapidjson-devel",
+          "brew": ""
         }
       }
     }

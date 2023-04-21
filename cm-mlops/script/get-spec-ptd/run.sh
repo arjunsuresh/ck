@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [[ -n "${CM_INPUT}" ]]; then
+  exit 0
+fi
+
 CUR_DIR=$PWD
 SCRIPT_DIR=${CM_TMP_CURRENT_SCRIPT_PATH}
 CM_GIT_REPO_FOLDER_NAME=${CM_GIT_REPO_FOLDER_NAME:-${CM_GIT_URL##*/}}
@@ -26,4 +30,6 @@ if [ ${CM_GIT_PATCH} == "yes" ]; then
   git apply ${SCRIPT_DIR}/patch/"$patch_filename"
   if [ "${?}" != "0" ]; then exit 1; fi
 fi
+chmod +x "${CUR_DIR}/power/inference_v1.0/ptd-linux-x86"
+chmod +x "${CUR_DIR}/power/inference_v1.0/ptd-windows-x86.exe"
 cd "$CUR_DIR"

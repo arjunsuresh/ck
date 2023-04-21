@@ -16,10 +16,10 @@ def preprocess(i):
             # If full dataset but path to imagenet is not specified,
             # try IMAGENET_PATH
 
-            path = os.environ.get('IMAGENET_PATH', '')
+            path = env.get('IMAGENET_PATH', '')
 
         if path == '':
-            return {'return':1, 'error':'Please use --input or set IMAGENET_PATH to the folder containing full ImageNet images.'}
+            return {'return':1, 'error':'Please rerun the last CM command with --env.IMAGENET_PATH={path the folder containing full ImageNet images} or envoke cm run script "get val dataset imagenet" --input={path to the folder containing ImageNet images}'}
 
         if not os.path.isdir(path):
             return {'return':1, 'error':'Path {} doesn\'t exist'.format(path)}
@@ -28,6 +28,12 @@ def preprocess(i):
 
         if not os.path.isfile(path_image):
             return {'return':1, 'error':'ImageNet file {} not found'.format(path_image)}
+
+        env['CM_DATASET_PATH'] = path
+        env['CM_DATASET_IMAGENET_PATH'] = path
+    elif path!='':
+        if not os.path.isdir(path):
+            return {'return':1, 'error':'Path {} doesn\'t exist'.format(path)}
 
         env['CM_DATASET_PATH'] = path
         env['CM_DATASET_IMAGENET_PATH'] = path

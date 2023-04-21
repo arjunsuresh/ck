@@ -1,3 +1,12 @@
+# 20230214
+ * experiment and graph gui are working now
+
+# 20230206:
+ * started prototyping cm run experiment
+
+# 20230123:
+ * added simple GUI to CM scripts
+
 # 20221206:
  * added "script_name" to the CM "script" meta to specify any native script name
  * added "--script_name" to "cm add script {alias} --script_name=my-native-script.sh"

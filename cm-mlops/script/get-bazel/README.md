@@ -1,101 +1,74 @@
-*This README is automatically generated - don't edit! See [extra README](README-extra.md) for extra notes!*
-
 <details>
 <summary>Click here to see the table of contents.</summary>
 
-* [About](#about)
-* [Category](#category)
-* [Origin](#origin)
-* [Meta description](#meta-description)
-* [Tags](#tags)
-* [Default environment](#default-environment)
-* [CM script workflow](#cm-script-workflow)
-* [New environment export](#new-environment-export)
-* [New environment detected from customize](#new-environment-detected-from-customize)
+* [Description](#description)
+* [Information](#information)
 * [Usage](#usage)
   * [ CM installation](#cm-installation)
   * [ CM script automation help](#cm-script-automation-help)
   * [ CM CLI](#cm-cli)
   * [ CM Python API](#cm-python-api)
+  * [ CM GUI](#cm-gui)
   * [ CM modular Docker container](#cm-modular-docker-container)
+* [Customization](#customization)
+  * [ Default environment](#default-environment)
+* [Script workflow, dependencies and native scripts](#script-workflow-dependencies-and-native-scripts)
+* [Script output](#script-output)
+* [New environment keys (filter)](#new-environment-keys-(filter))
+* [New environment keys auto-detected from customize](#new-environment-keys-auto-detected-from-customize)
 * [Maintainers](#maintainers)
 
 </details>
 
-___
-### About
+*Note that this README is automatically generated - don't edit! See [more info](README-extra.md).*
 
-*TBD*
-___
-### Category
+### Description
 
-Detection or installation of tools and artifacts.
-___
-### Origin
 
-* GitHub repository: *[mlcommons@ck](https://github.com/mlcommons/ck/tree/master/cm-mlops)*
-* CM artifact for this script (interoperability module, native scripts and meta): *[GitHub](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel)*
-* CM automation "script": *[Docs](https://github.com/octoml/ck/blob/master/docs/list_of_automations.md#script)*
+See [more info](README-extra.md).
 
-___
-### Meta description
-[_cm.json](_cm.json)
+#### Information
 
-___
-### Tags
-get,bazel,get-bazel
-
-___
-### Default environment
-
-___
-### CM script workflow
-
-  1. Read "deps" on other CM scripts from [meta](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel/_cm.json)
-  1. ***Run "preprocess" function from [customize.py](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel/customize.py)***
-  1. ***Read "prehook_deps" on other CM scripts from [meta](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel/_cm.json)***
-     * install,bazel
-       * `if (CM_REQUIRE_INSTALL  == yes)`
-       - CM script: [install-bazel](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/install-bazel)
-  1. ***Run native script if exists***
-     * [run.sh](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel/run.sh)
-  1. Read "posthook_deps" on other CM scripts from [meta](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel/_cm.json)
-  1. ***Run "postrocess" function from [customize.py](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel/customize.py)***
-  1. Read "post_deps" on other CM scripts from [meta](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel/_cm.json)
-___
-### New environment export
-
-* **+PATH**
-* **CM_BAZEL_***
-___
-### New environment detected from customize
-
-* **CM_BAZEL_CACHE_TAGS**
-* **CM_BAZEL_INSTALLED_PATH**
-* **CM_REQUIRE_INSTALL**
+* Category: *Detection or installation of tools and artifacts.*
+* CM GitHub repository: *[mlcommons@ck](https://github.com/mlcommons/ck/tree/master/cm-mlops)*
+* GitHub directory for this script: *[GitHub](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel)*
+* CM meta description for this script: *[_cm.json](_cm.json)*
+* CM "database" tags to find this script: *get,bazel,get-bazel*
+* Output cached?: *True*
 ___
 ### Usage
 
 #### CM installation
+
 [Guide](https://github.com/mlcommons/ck/blob/master/docs/installation.md)
 
-#### CM script automation help
+##### CM pull repository
+
+```cm pull repo mlcommons@ck```
+
+##### CM script automation help
+
 ```cm run script --help```
 
 #### CM CLI
-`cm run script --tags="get,bazel,get-bazel"`
 
-*or*
+1. `cm run script --tags=get,bazel,get-bazel `
 
-`cm run script "get bazel get-bazel"`
+2. `cm run script "get bazel get-bazel" `
 
-*or*
+3. `cm run script eaef0be38bac493c `
 
-`cm run script eaef0be38bac493c`
+* `variations` can be seen [here](#variations)
+
+* `input_flags` can be seen [here](#script-flags-mapped-to-environment)
 
 #### CM Python API
 
+<details>
+<summary>Click here to expand this section.</summary>
+
 ```python
+
 import cmind
 
 r = cmind.access({'action':'run'
@@ -109,11 +82,65 @@ r = cmind.access({'action':'run'
 
 if r['return']>0:
     print (r['error'])
+
 ```
 
+</details>
+
+
+#### CM GUI
+
+```cm run script --tags=gui --script="get,bazel,get-bazel"```
+
+Use this [online GUI](https://cKnowledge.org/cm-gui/?tags=get,bazel,get-bazel) to generate CM CMD.
+
 #### CM modular Docker container
+
 *TBD*
+
+___
+### Customization
+
+#### Default environment
+
+<details>
+<summary>Click here to expand this section.</summary>
+
+These keys can be updated via `--env.KEY=VALUE` or `env` dictionary in `@input.json` or using script flags.
+
+
+</details>
+
+___
+### Script workflow, dependencies and native scripts
+
+<details>
+<summary>Click here to expand this section.</summary>
+
+  1. Read "deps" on other CM scripts from [meta](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel/_cm.json)
+  1. ***Run "preprocess" function from [customize.py](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel/customize.py)***
+  1. ***Read "prehook_deps" on other CM scripts from [meta](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel/_cm.json)***
+     * install,bazel
+       * `if (CM_REQUIRE_INSTALL  == yes)`
+       - CM script: [install-bazel](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/install-bazel)
+  1. ***Run native script if exists***
+     * [run.sh](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel/run.sh)
+  1. Read "posthook_deps" on other CM scripts from [meta](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel/_cm.json)
+  1. ***Run "postrocess" function from [customize.py](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel/customize.py)***
+  1. Read "post_deps" on other CM scripts from [meta](https://github.com/mlcommons/ck/tree/master/cm-mlops/script/get-bazel/_cm.json)
+</details>
+
+___
+### Script output
+#### New environment keys (filter)
+
+* `+PATH`
+* `CM_BAZEL_*`
+#### New environment keys auto-detected from customize
+
+* `CM_BAZEL_CACHE_TAGS`
+* `CM_BAZEL_INSTALLED_PATH`
 ___
 ### Maintainers
 
-* [Open MLCommons taskforce on education and reproducibility](https://github.com/mlcommons/ck/blob/master/docs/mlperf-education-workgroup.md)
+* [Open MLCommons taskforce on automation and reproducibility](https://github.com/mlcommons/ck/blob/master/docs/taskforce.md)

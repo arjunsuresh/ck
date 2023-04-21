@@ -1,0 +1,128 @@
+# Identification of this CM script
+alias: build-mlperf-inference-server-nvidia
+uid: f37403af5e9f4541
+cache: true
+automation_alias: script
+automation_uid: 5b4e0237da074764
+
+category: "Modular MLPerf benchmarks"
+
+
+# User-friendly tags to find this CM script
+tags:
+  - build
+  - mlcommons
+  - mlperf
+  - inference
+  - inference-server
+  - server
+  - nvidia-harness
+  - nvidia
+
+
+new_env_keys:
+  - CM_MLPERF_INFERENCE_NVIDIA_CODE_PATH
+  - MLPERF_SCRATCH_PATH
+
+default_env:
+  CM_MAKE_BUILD_COMMAND: build
+  CM_MAKE_CLEAN: "no"
+
+input_mapping:
+  clean: CM_MAKE_CLEAN
+
+# Dependencies on other CM scripts
+
+deps:
+
+  # Detect host OS features
+  - tags: detect,os
+
+  # Detect host CPU features
+  - tags: detect,cpu
+
+  # Install system dependencies on a given host
+  - tags: get,sys-utils-cm
+
+  # Detect python3
+  - tags: get,python3
+    names:
+    - python
+    - python3
+
+  # Detect CUDA
+  - tags: get,cuda,_cudnn
+    version_max: "11.11"
+    enable_if_env:
+      CM_MLPERF_DEVICE:
+        - cuda
+        - inferentia
+
+  # Detect Tensorrt
+  - tags: get,tensorrt
+    enable_if_env:
+      CM_MLPERF_DEVICE:
+        - cuda
+        - inferentia
+
+  # Detect gcc
+  - tags: get,gcc
+
+  # Detect CMake
+  - tags: get,cmake
+    version_min: "3.18"
+
+  # Detect Google Logger
+  - tags: get,generic,sys-util,_glog-dev
+
+  # Detect GFlags
+  - tags: get,generic,sys-util,_gflags-dev
+
+  # Detect libre2-dev
+  - tags: get,generic,sys-util,_libre2-dev
+
+  # Detect libnuma-dev
+  - tags: get,generic,sys-util,_libnuma-dev
+
+  # Detect libboost-all-dev
+  - tags: get,generic,sys-util,_libboost-all-dev
+
+  # Detect rapidjson-dev
+  - tags: get,generic,sys-util,_rapidjson-dev
+
+
+  # Download Nvidia Submission Code
+  - tags: get,nvidia,mlperf,inference,common-code,_custom
+    names:
+    - nvidia-inference-common-code
+
+  # Detect pycuda
+  - tags: get,generic-python-lib,_pycuda
+
+  # Detect opencv-python
+  - tags: get,generic-python-lib,_opencv-python
+
+  # Detect nvidia-dali
+  - tags: get,generic-python-lib,_nvidia-dali
+
+post_deps:
+  # Detect nvidia system
+  - tags: add,custom,system,nvidia
+
+
+variations:
+  # Target devices
+  cpu:
+    group: device
+    env:
+      CM_MLPERF_DEVICE: cpu
+  inferentia:
+    group: device
+    env:
+      CM_MLPERF_DEVICE: inferentia
+  cuda:
+    group: device
+    default: true
+    env:
+      CM_MLPERF_DEVICE: cuda
+      CM_MLPERF_DEVICE_LIB_NAMESPEC: cudart

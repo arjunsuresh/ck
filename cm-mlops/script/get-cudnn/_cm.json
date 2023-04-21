@@ -11,19 +11,30 @@
     "CM_INPUT": ""
   },
   "input_mapping": {
-    "input": "CM_INPUT"
+    "input": "CM_INPUT",
+    "tar_file": "CM_CUDNN_TAR_FILE_PATH"
   },
   "input_description": {
-    "input": "Path to the cuDNN Tar file downloaded from Nvidia website (https://developer.nvidia.com/cudnn)"
+    "input": "Full path to the installed cuDNN library",
+    "tar_file": "Full path to the cuDNN Tar file downloaded from Nvidia website (https://developer.nvidia.com/cudnn)"
   },
   "deps": [
     {
+      "tags": "detect,os"
+    },
+    {
       "names": [ "cuda" ],
-      "tags": "get,cuda"
+      "tags": "get,cuda",
+      "skip_if_env": {
+        "CM_CUDA_PATH_LIB": [ "on" ],
+        "CM_CUDA_PATH_INCLUDE": [ "on" ]
+      }
     }
   ],
   "new_env_keys": [
     "CM_CUDNN_*",
+    "CM_CUDA_PATH_LIB_CUDNN",
+    "CM_CUDA_PATH_LIB_CUDNN_EXISTS",
     "+PATH",
     "+C_INCLUDE_PATH",
     "+CPLUS_INCLUDE_PATH",
